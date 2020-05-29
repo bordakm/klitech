@@ -9,30 +9,42 @@ import { Router } from '@angular/router';
 })
 export class MovieListComponent implements OnInit {
 
-  constructor(private movieService: MovieService, private router: Router ) { }
+  constructor(private movieService: MovieService, private router: Router) { }
   movies: Movie[] = [];
-  lastSearchWord;
   page = 1;
+  searchString: string;
 
   ngOnInit(): void {
     this.getMovies('');
+    window.addEventListener('scroll', x => {
+      const t = document.documentElement;
+      if (t.scrollHeight - t.clientHeight < t.scrollTop + 10) {
+        this.onScroll();
+      }
+    });
   }
 
-  getMovies(searchText: string){
+  onScroll() {
+    this.addNextBatch();
+  }
+
+  addNextBatch() {
+    this.movieService.getMovies(this.searchString, this.page).subscribe(y => this.movies = this.movies.concat(y.results));
+    this.page++;
+  }
+
+  getMovies(searchText: string) {
     this.movieService.getMovies(searchText, 1).subscribe((x: MovieResults) => {
       this.movies = x.results;
     });
   }
 
-  navMovie(id: number){
+  navMovie(id: number) {
     this.router.navigate(['/movie/' + id]);
   }
 
-  searchTextChanged(x: any){
-    const search = x.target.value;
-    if (search === this.lastSearchWord) { return; }
+  searchTextChanged(x: any) {
     this.page = 1;
-    this.lastSearchWord = search;
-    this.getMovies(search || '');
+    this.getMovies(x || '');
   }
 }

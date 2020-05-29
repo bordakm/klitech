@@ -4,13 +4,11 @@
             <h1>Movies</h1>
         </span>
         <span>
-
             <span class="h5">Search:</span>
-
             <span>
                 <mat-form-field class="m-2">
                     <mat-label>Keywords</mat-label>
-                    <input (keyup)="searchTextChanged($event)" matInput placeholder="eg. Harry Potter" value="">
+                    <input [(ngModel)]="searchString" (ngModelChange)="searchTextChanged($event)" matInput placeholder="eg. Harry Potter" value="">
                 </mat-form-field>
             </span>
         </span>
@@ -19,8 +17,3 @@
     </app-movie-card>
 
 </div>
-<button mat-raised-button>Basic</button>
-<input matInput placeholder="Ex. Pizza" value="Sushi">
-<button mat-raised-button color="primary">Primary</button>
-<button mat-button color="accent">Accent</button>
-<button mat-button color="warn">Warn</button>

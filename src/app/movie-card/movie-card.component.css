@@ -2,5 +2,11 @@
     display: inline-block;
     max-width: 350px;
     min-width: 350px;
+}
 
+.movie-card-image{
+    max-height: 230px;
+    min-height: 230px;
+    min-width: 160px;
+    max-width: 160px;
 }

@@ -96,7 +96,7 @@ export class MovieService {
       });
     }
     else {
-      return this.http.get('https://api.themoviedb.org/3/movie/popular', {
+      return this.http.get<MovieResults>('https://api.themoviedb.org/3/movie/popular', {
         params: new HttpParams()
           .set('api_key', 'ad28e1491c1cfcc0c75e67693e7b6abd')
           .set('page', page.toString())
