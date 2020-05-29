@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { MovieService, Movie, MovieResults } from '../movie.service';
+import { MovieService } from '../movie.service';
 import { Router } from '@angular/router';
+import { Movie } from '../types/movie';
+import { MovieResults } from '../types/movie-results';
 
 @Component({
   selector: 'app-movie-list',
@@ -11,6 +13,9 @@ export class MovieListComponent implements OnInit {
 
   constructor(private movieService: MovieService, private router: Router) { }
   movies: Movie[] = [];
+  get moviesCounted() {
+    return this.movies.slice(0, Math.floor(this.movies.length / 6) * 6);
+  }
   page = 1;
   searchString: string;
   /**
@@ -76,7 +81,9 @@ export class MovieListComponent implements OnInit {
   }
 
   /**
-   * 
+   * Azt az eseményt kezeli, hogy változik a keresési mező értéke.
+   * Elmenti a keresett kulcsazavakat a localStorage-ba, és betölti a keresett
+   * kulcsszóhoz talált filmeket.
    */
   searchTextChanged(text: any) {
     this.saveSearch(text);

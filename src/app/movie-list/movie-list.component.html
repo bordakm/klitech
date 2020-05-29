@@ -14,7 +14,7 @@
         </span>
     </div>
     <div class="list">
-        <app-movie-card class="card" *ngFor="let m of movies" (click)="navMovie(m.id)" [movie]="m" >
+        <app-movie-card class="card" *ngFor="let m of moviesCounted" (click)="navMovie(m.id)" [movie]="m" >
         </app-movie-card>
     </div>
 
