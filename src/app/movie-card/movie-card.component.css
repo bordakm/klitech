@@ -10,3 +10,12 @@
     min-width: 160px;
     max-width: 160px;
 }
+
+mat-card-title {
+    height: 25px !important;
+    overflow: hidden !important;
+}
+
+.example-card {
+    height: 100%;
+}
