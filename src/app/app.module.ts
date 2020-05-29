@@ -12,6 +12,7 @@ import { MovieListComponent } from './movie-list/movie-list.component'; // CLI i
 import { FormsModule } from '@angular/forms';
 import { MovieCardComponent } from './movie-card/movie-card.component';
 import { ActorComponent } from './actor/actor.component';
+import {MatCardModule} from '@angular/material/card';
 
 const routes: Routes = [
   { path: 'movie/:id', component: MovieComponent },
@@ -36,6 +37,7 @@ const routes: Routes = [
     MatSliderModule,
     HttpClientModule,
     FormsModule,
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

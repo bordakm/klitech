@@ -14,6 +14,8 @@ export interface Movie {
 
 export interface MovieResults {
   results: Movie[];
+  total_pages: number;
+  total_results: number;
 }
 
 export interface Image {
@@ -84,20 +86,20 @@ export class MovieService {
     });
   }
 
-  getMovies(searchtext: string = '') {
+  getMovies(searchtext: string = '', page: number = 1) {
     if (searchtext) {
       return this.http.get<MovieResults>('https://api.themoviedb.org/3/search/movie', {
         params: new HttpParams()
           .set('api_key', 'ad28e1491c1cfcc0c75e67693e7b6abd')
           .set('query', searchtext)
-          .set('page', '1')
+          .set('page', page.toString())
       });
     }
     else {
       return this.http.get('https://api.themoviedb.org/3/movie/popular', {
         params: new HttpParams()
           .set('api_key', 'ad28e1491c1cfcc0c75e67693e7b6abd')
-          .set('page', '1')
+          .set('page', page.toString())
       });
     }
   }

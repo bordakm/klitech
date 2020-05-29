@@ -11,22 +11,28 @@ export class MovieListComponent implements OnInit {
 
   constructor(private movieService: MovieService, private router: Router ) { }
   movies: Movie[] = [];
+  lastSearchWord;
+  page = 1;
 
   ngOnInit(): void {
     this.getMovies('');
   }
 
   getMovies(searchText: string){
-    this.movieService.getMovies(searchText).subscribe((x: MovieResults) => {
+    this.movieService.getMovies(searchText, 1).subscribe((x: MovieResults) => {
       this.movies = x.results;
     });
   }
 
-  navMovie(x){
-    this.router.navigate(['/movie/' + x]);
+  navMovie(id: number){
+    this.router.navigate(['/movie/' + id]);
   }
 
   searchTextChanged(x: any){
-    this.getMovies(x.target.value || '');
+    const search = x.target.value;
+    if (search === this.lastSearchWord) { return; }
+    this.page = 1;
+    this.lastSearchWord = search;
+    this.getMovies(search || '');
   }
 }
