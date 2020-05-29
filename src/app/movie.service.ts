@@ -11,21 +11,25 @@ import { Credits } from './types/credits';
 export class MovieService {
 
   constructor(private http: HttpClient) { }
-  getPopularMovies() {
-    return this.http.get('https://api.themoviedb.org/3/movie/popular', {
-      params: new HttpParams()
-        .set('api_key', 'ad28e1491c1cfcc0c75e67693e7b6abd')
-        .set('page', '1')
-    });
-  }
 
+  /**
+   * Egy megadott IDjű film részletes adatait kéri le
+   * @param id A film ID-je
+   */
   getMovie(id: number) {
     return this.http.get<Movie>('https://api.themoviedb.org/3/movie/' + id, {
       params: new HttpParams()
         .set('api_key', 'ad28e1491c1cfcc0c75e67693e7b6abd')
     });
   }
-
+  /**
+   * Filmeket listáz a keresési szövegtől függően.
+   * Amennyiben üres a keresett szó, a legnépszerűbb filmek kerülnek listázásra.
+   * Amennyiben megadunk keress szót, arra szűrt találatokat kapunk
+   * A page megadásával a lekérendő lap számát adhatjuk meg
+   * @param searchtext A keresett szöveg
+   * @param page A megjelenítendő oldalszám
+   */
   getMovies(searchtext: string = '', page: number = 1) {
     if (searchtext) {
       return this.http.get<MovieResults>('https://api.themoviedb.org/3/search/movie', {
@@ -44,13 +48,20 @@ export class MovieService {
     }
   }
 
+  /**
+   * A megadott ID-jű filmhez kér le képeket
+   * @param id A film ID-je
+   */
   getMovieImages(id: number) {
     return this.http.get<MovieImages>('https://api.themoviedb.org/3/movie/' + id + '/images', {
       params: new HttpParams()
         .set('api_key', 'ad28e1491c1cfcc0c75e67693e7b6abd')
     });
   }
-
+  /**
+   * A megadott IDjű filmhez tartozó szerepeket kér le
+   * @param id A film ID-je
+   */
   getMovieCredits(id: number) {
     return this.http.get<Credits>('https://api.themoviedb.org/3/movie/' + id + '/credits', {
       params: new HttpParams()
