@@ -16,7 +16,7 @@ export interface MovieResults {
   results: Movie[];
 }
 
-export interface Poster {
+export interface Image {
   file_path: string;
   height: number;
   width: number;
@@ -24,7 +24,36 @@ export interface Poster {
 
 export interface MovieImages {
   id: number;
-  posters: Poster[];
+  posters: Image[];
+}
+
+export interface Cast {
+  id: number;
+  name: string;
+  character: string;
+  birthday: string;
+  place_of_birth: string;
+}
+
+export interface Actor {
+  id: number;
+  name: string;
+  birthday: string;
+  place_of_birth: string;
+  biography: string;
+  popularity: number;
+}
+
+export interface Credits {
+  cast: Cast[];
+}
+
+export interface ActorImages {
+  profiles: Image[];
+}
+
+export interface ActorsMovies {
+  cast: Movie[];
 }
 
 @Injectable({
@@ -77,7 +106,34 @@ export class MovieService {
     return this.http.get<MovieImages>('https://api.themoviedb.org/3/movie/' + id + '/images', {
       params: new HttpParams()
         .set('api_key', 'ad28e1491c1cfcc0c75e67693e7b6abd')
-        .set('page', '1')
+    });
+  }
+
+  getMovieCredits(id: number) {
+    return this.http.get<Credits>('https://api.themoviedb.org/3/movie/' + id + '/credits', {
+      params: new HttpParams()
+        .set('api_key', 'ad28e1491c1cfcc0c75e67693e7b6abd')
+    });
+  }
+
+  getActorDetails(id: number) {
+    return this.http.get<Actor>('https://api.themoviedb.org/3/person/' + id, {
+      params: new HttpParams()
+        .set('api_key', 'ad28e1491c1cfcc0c75e67693e7b6abd')
+    });
+  }
+
+  getActorImages(id: number) {
+    return this.http.get<ActorImages>('https://api.themoviedb.org/3/person/' + id + '/images', {
+      params: new HttpParams()
+        .set('api_key', 'ad28e1491c1cfcc0c75e67693e7b6abd')
+    });
+  }
+
+  getActorMovies(id: number) {
+    return this.http.get<ActorsMovies>('https://api.themoviedb.org/3/person/' + id + '/movie_credits', {
+      params: new HttpParams()
+        .set('api_key', 'ad28e1491c1cfcc0c75e67693e7b6abd')
     });
   }
 }

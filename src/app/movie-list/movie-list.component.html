@@ -1,31 +1,26 @@
-<p>movie-list works!</p>
-<!--mov: {{movies}}-->
+<div class="px-4">
+    <div class="d-flex align-items-center justify-content-between">
+        <span>
+            <h1>Movies</h1>
+        </span>
+        <span>
 
-<mat-form-field class="m-2">
-    <mat-label>Keresett kulcsszavak</mat-label>
-    <input (keyup)="searchTextChanged($event)" matInput placeholder="pl. Harry Potter" value="">
-</mat-form-field>
+            <span class="h5">Search:</span>
 
+            <span>
+                <mat-form-field class="m-2">
+                    <mat-label>Keywords</mat-label>
+                    <input (keyup)="searchTextChanged($event)" matInput placeholder="eg. Harry Potter" value="">
+                </mat-form-field>
+            </span>
+        </span>
+    </div>
+    <app-movie-card *ngFor="let m of movies" (click)="navMovie(m.id)" [movie]="m" >
+    </app-movie-card>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<p *ngFor="let m of movies" (click)="navMovie(m.id)">{{m.id}} {{m.title}} {{m.vote_average}}</p>
-
+</div>
 <button mat-raised-button>Basic</button>
 <input matInput placeholder="Ex. Pizza" value="Sushi">
 <button mat-raised-button color="primary">Primary</button>
 <button mat-button color="accent">Accent</button>
 <button mat-button color="warn">Warn</button>
- 

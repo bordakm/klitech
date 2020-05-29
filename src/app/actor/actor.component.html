@@ -1,0 +1,20 @@
+<div class="d-flex m-5">
+    <img class="actor-image mr-4" src={{imageurl}} />
+    <span class="movie-details">
+        <div class="mx-2"> 
+            <span class="h1">{{actor.name}}</span>
+            <span class="h5 mx-3">({{actor.birthday}})</span>
+        </div>
+        <h5 class="mx-2">Place of birth: {{actor.place_of_birth}} </h5>
+        <h2 class="mx-2">Popularity: {{actor.popularity}}</h2>
+        <h2 class="mx-2">Biography:</h2>
+        <div class="mx-2">{{actor.biography}}</div>
+    </span>
+</div>
+
+<div class="m-5">
+    <div class="h3">Known from movies:</div>
+    <div *ngFor="let m of movies" class="mb-2">
+        <a routerLink="/movie/{{m.id}}">{{m.title}}</a>: {{m.character}} 
+    </div>
+</div>

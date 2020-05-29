@@ -4,10 +4,10 @@
 <button mat-button color="warn">Warn</button>
 <app-movie [movieId]="123"> </app-movie> -->
 
-<a class="logo" routerLink="/">
-    <span class="mx-4 mt-2 display-4">Film világ</span>
-</a>
 
-<hr />
-
-<router-outlet></router-outlet>
+<router-outlet>
+    <a class="logo" routerLink="/">
+        <span class="mx-4 mt-2 display-4">Film világ</span>
+    </a>
+    <hr />
+</router-outlet>

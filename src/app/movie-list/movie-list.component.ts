@@ -13,9 +13,6 @@ export class MovieListComponent implements OnInit {
   movies: Movie[] = [];
 
   ngOnInit(): void {
-    /*this.movieService.getPopularMovies().subscribe((x: any) => {
-      this.movies = x.results;
-    });*/
     this.getMovies('');
   }
 
@@ -26,7 +23,7 @@ export class MovieListComponent implements OnInit {
   }
 
   navMovie(x){
-    this.router.navigate(['movie/' + x]);
+    this.router.navigate(['/movie/' + x]);
   }
 
   searchTextChanged(x: any){

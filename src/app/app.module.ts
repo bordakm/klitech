@@ -10,9 +10,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { Routes, RouterModule } from '@angular/router';
 import { MovieListComponent } from './movie-list/movie-list.component'; // CLI imports router
 import { FormsModule } from '@angular/forms';
+import { MovieCardComponent } from './movie-card/movie-card.component';
+import { ActorComponent } from './actor/actor.component';
 
 const routes: Routes = [
   { path: 'movie/:id', component: MovieComponent },
+  { path: 'actor/:id', component: ActorComponent },
   { path: '**', component: MovieListComponent },
 
 ];
@@ -21,6 +24,8 @@ const routes: Routes = [
     AppComponent,
     MovieComponent,
     MovieListComponent,
+    MovieCardComponent,
+    ActorComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),

@@ -9,6 +9,11 @@
         <h2 class="mx-2">Popularity: {{movie.popularity}}</h2>
         <h2 class="mx-2">Overview:</h2>
         <div class="mx-2">{{movie.overview}}</div>
-        <!--<div>{{movie.id}}</div>-->
     </span>
+</div>
+<div class="m-5">
+    <div class="h3">Cast:</div>
+    <div *ngFor="let p of cast" class="mb-2">
+        {{p.character}}: <a routerLink="/actor/{{p.id}}">{{p.name}}</a>
+    </div>
 </div>
