@@ -58,8 +58,8 @@ export class MovieListComponent implements OnInit {
   }
 
   /**
-   * 
-   * @param searchText 
+   * Betölti a filmekhez a megadott kulcsszóra kapott találatokat
+   * @param searchText A keresési kulcsszó
    */
   getMovies(searchText: string) {
     this.movieService.getMovies(searchText, 1).subscribe((x: MovieResults) => {
@@ -67,10 +67,17 @@ export class MovieListComponent implements OnInit {
     });
   }
 
+  /**
+   * A megadott ID-jű film oldalára navigál
+   * @param id a film id-je, amelyre navigálni szeretnénk
+   */
   navMovie(id: number) {
     this.router.navigate(['/movie/' + id]);
   }
 
+  /**
+   * 
+   */
   searchTextChanged(text: any) {
     this.saveSearch(text);
     this.page = 1;
