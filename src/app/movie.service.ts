@@ -11,7 +11,7 @@ import { Credits } from './types/credits';
 export class MovieService {
 
   constructor(private http: HttpClient) { }
-
+  APIkey = 'ad28e1491c1cfcc0c75e67693e7b6abd';
   /**
    * Egy megadott IDjű film részletes adatait kéri le
    * @param id A film ID-je
@@ -19,7 +19,7 @@ export class MovieService {
   getMovie(id: number) {
     return this.http.get<Movie>('https://api.themoviedb.org/3/movie/' + id, {
       params: new HttpParams()
-        .set('api_key', 'ad28e1491c1cfcc0c75e67693e7b6abd')
+        .set('api_key', this.APIkey)
     });
   }
   /**
@@ -34,7 +34,7 @@ export class MovieService {
     if (searchtext) {
       return this.http.get<MovieResults>('https://api.themoviedb.org/3/search/movie', {
         params: new HttpParams()
-          .set('api_key', 'ad28e1491c1cfcc0c75e67693e7b6abd')
+          .set('api_key', this.APIkey)
           .set('query', searchtext)
           .set('page', page.toString())
       });
@@ -42,7 +42,7 @@ export class MovieService {
     else {
       return this.http.get<MovieResults>('https://api.themoviedb.org/3/movie/popular', {
         params: new HttpParams()
-          .set('api_key', 'ad28e1491c1cfcc0c75e67693e7b6abd')
+          .set('api_key', this.APIkey)
           .set('page', page.toString())
       });
     }
@@ -55,7 +55,7 @@ export class MovieService {
   getMovieImages(id: number) {
     return this.http.get<MovieImages>('https://api.themoviedb.org/3/movie/' + id + '/images', {
       params: new HttpParams()
-        .set('api_key', 'ad28e1491c1cfcc0c75e67693e7b6abd')
+        .set('api_key', this.APIkey)
     });
   }
   /**
@@ -65,7 +65,7 @@ export class MovieService {
   getMovieCredits(id: number) {
     return this.http.get<Credits>('https://api.themoviedb.org/3/movie/' + id + '/credits', {
       params: new HttpParams()
-        .set('api_key', 'ad28e1491c1cfcc0c75e67693e7b6abd')
+        .set('api_key', this.APIkey)
     });
   }
 }
