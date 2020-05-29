@@ -11,13 +11,6 @@ import { Credits } from './types/credits';
 export class MovieService {
 
   constructor(private http: HttpClient) { }
-
-  // kulcsszavas keresés film/sorozat:
-  // találatoknál a részletekben 5-6 fontos adat kiemelve
-  // szereplők, sorozatoknál epizódok
-  // színészek adatlapja
-  // legnépszerűbb filmek, adott témához
-
   getPopularMovies() {
     return this.http.get('https://api.themoviedb.org/3/movie/popular', {
       params: new HttpParams()
