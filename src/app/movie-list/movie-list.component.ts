@@ -13,9 +13,12 @@ export class MovieListComponent implements OnInit {
   movies: Movie[] = [];
   page = 1;
   searchString: string;
-
+  /**
+   * Betölti a localStorage-ból az utoljára keresett kifejezést()
+   */
   ngOnInit(): void {
-    this.getMovies('');
+    this.loadSearch();
+    this.getMovies(this.searchString);
     window.addEventListener('scroll', x => {
       const t = document.documentElement;
       if (t.scrollHeight - t.clientHeight < t.scrollTop + 10) {
@@ -24,15 +27,40 @@ export class MovieListComponent implements OnInit {
     });
   }
 
+  /**
+   * Elmenti a localStorage-be a keresett szót searchWord kulcs alá.
+   * @param text A keress kifekezés.
+   */
+  saveSearch(text) {
+    window.localStorage.setItem('searchWord', text);
+  }
+
+  /**
+   * Betölti a localStorage-ből az utolsó keresett szót searchWord kulcs alól a searchString változóba
+   */
+  loadSearch() {
+    this.searchString = window.localStorage.getItem('searchWord');
+  }
+
+  /**
+   * Azt az eseményt kezeli, mikor a felhasználó a görgetéssel az oldal aljára ért
+   */
   onScroll() {
-    this.addNextBatch();
+    this.loadNextMovies();
   }
 
-  addNextBatch() {
-    this.movieService.getMovies(this.searchString, this.page).subscribe(y => this.movies = this.movies.concat(y.results));
+  /**
+   * Betölti a következő oldal filmet, és hozzáfűzi az eddigi filmek listájához.
+   */
+  loadNextMovies() {
     this.page++;
+    this.movieService.getMovies(this.searchString, this.page).subscribe(y => this.movies = this.movies.concat(y.results));
   }
 
+  /**
+   * 
+   * @param searchText 
+   */
   getMovies(searchText: string) {
     this.movieService.getMovies(searchText, 1).subscribe((x: MovieResults) => {
       this.movies = x.results;
@@ -43,8 +71,9 @@ export class MovieListComponent implements OnInit {
     this.router.navigate(['/movie/' + id]);
   }
 
-  searchTextChanged(x: any) {
+  searchTextChanged(text: any) {
+    this.saveSearch(text);
     this.page = 1;
-    this.getMovies(x || '');
+    this.getMovies(text || '');
   }
 }

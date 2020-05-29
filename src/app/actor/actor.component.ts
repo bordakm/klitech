@@ -13,6 +13,11 @@ export class ActorComponent implements OnInit {
   actor: Actor;
   imageurl: string;
   movies: Movie[];
+  /**
+   *  Kiolvassa az URL-ből a színész ID-jét, majd betölti a színészhez tartozó részletes adatokat,
+   *  képeket, valamint az adott színészhez tartozó filmeket. Amennyiben nem szerepel kép a színészről,
+   *  ez egy placeholder képpel kerül helyettesítésre.
+   */
   ngOnInit(): void {
     this.route.params.subscribe(p => {
       this.movieService.getActorDetails(p.id).subscribe(a => {

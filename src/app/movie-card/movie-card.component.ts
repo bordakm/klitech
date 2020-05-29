@@ -11,6 +11,10 @@ export class MovieCardComponent implements OnInit {
   constructor(private movieService: MovieService) { }
   @Input() movie: Movie;
   imageurl: string;
+  /**
+   * Lekéri a kártya filmjéhez tartozó képek listáját, majd beállítja az imageurl változóba
+   * a legelső megtalált képet. Amennyimen nincs ilyen kép, egy placeholder képpel helyettesíti azt.
+   */
   ngOnInit(): void {
     this.movieService.getMovieImages(this.movie.id).subscribe(x => {
       if (x.posters.length > 0) {

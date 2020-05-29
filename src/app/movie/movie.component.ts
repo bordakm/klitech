@@ -12,6 +12,11 @@ export class MovieComponent implements OnInit {
   imageurl: string;
   cast: Cast[];
   constructor(private route: ActivatedRoute, private movieService: MovieService) { }
+  /**
+   * Kiolvassa az URL-ből a film ID-jét, majd ez alapján lekéri a film részleteit, a filmhez tartozó képeket,
+   * amiket ha nem talál, egy placeholder képpel helyettesít. Ezen kívül betölti a filmben résztvevő
+   * összes színész listáját.
+   */
   ngOnInit(): void {
     this.route.params.subscribe(p => {
       this.movieService.getMovie(p.id).subscribe(m => {
